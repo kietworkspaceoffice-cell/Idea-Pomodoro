@@ -8,5 +8,5 @@ function updateClock() {
   document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-setInterval(updateClock, 1000);
+setInterval(updateClock, 10);
 updateClock(); // Gọi lần đầu để hiển thị ngay

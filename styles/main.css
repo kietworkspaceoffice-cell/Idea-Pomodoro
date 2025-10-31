@@ -19,7 +19,7 @@ header {
 
     color: hsl(0, 100%, 100%);
     border: 1px solid hsla(209, 63%, 39%, 0.288);
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border-radius: 0.5rem;
     background-color: rgba(194, 225, 238, 0.26);
     box-shadow: 4px 4px 8px rgba(83, 122, 139, 0.568);
@@ -47,7 +47,7 @@ main {
     width: 100%;
     aspect-ratio: 2/1;
     margin-top: 1rem;
-    font-size: 5rem;
+    font-size: 6rem;
     font-weight: bold;
     color: hsl(0, 0%, 100%);
     letter-spacing: 2px;

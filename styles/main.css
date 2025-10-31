@@ -1,59 +1,62 @@
 * {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background-color: #1e1e2f;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    font-family: "Momo Trust Display", sans-serif;
+    background: linear-gradient(hsla(177, 63%, 37%, 0.658), rgb(126, 176, 252));
+    min-height: 100vh;
+    font-size: 18px;
+    padding: 2rem;
 }
 
-.container {
-  text-align: center;
-  background: #2e2e45;
-  padding: 2rem;
-  border-radius: 20px;
-  width: 320px;
+/* header */
+header {
+    display: flex;
+    gap: 1rem;
+
+    color: hsl(0, 100%, 100%);
+    border: 1px solid hsla(209, 63%, 39%, 0.288);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgba(194, 225, 238, 0.26);
+    box-shadow: 4px 4px 8px rgba(83, 122, 139, 0.568);
 }
 
-.timer-display #time {
-  font-size: 4rem;
-  margin: 1rem 0;
+.logo-page {
+    width: 50px;
+    height: auto;
 }
 
-.controls button, .music-controls button {
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 10px;
-  background-color: #4c5cff;
-  color: white;
-  cursor: pointer;
+.page-title {
+    letter-spacing: 0.2rem;
 }
 
-.controls button:hover {
-  background-color: #6d7cff;
+/* main */
+main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+/* flip-clock */
 
-.settings {
-  margin-top: 1rem;
-  text-align: left;
-}
+.digital-clock {
+    width: 100%;
+    aspect-ratio: 2/1;
+    margin-top: 1rem;
+    font-size: 5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 100%);
+    letter-spacing: 2px;
+    border: 1px solid hsla(209, 63%, 39%, 0.288);
+    border-radius: 0.5rem;
+    background-color: rgba(194, 225, 238, 0.26);
+    box-shadow: 4px 4px 8px rgba(83, 122, 139, 0.568);
 
-.settings label {
-  display: block;
-  margin: 0.5rem 0;
-}
-
-input {
-  width: 60px;
-  text-align: center;
-  border-radius: 6px;
-  border: none;
-  padding: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

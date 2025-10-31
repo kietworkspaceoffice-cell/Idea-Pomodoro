@@ -4,37 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro Timer</title>
+  <link rel="shortcut icon" href="./assets/pomodoro-technique4.png" type="image/x-icon">
   <link rel="stylesheet" href="./styles/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Figtree:ital,wght@0,300..900;1,300..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Momo+Trust+Display&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main class="container">
-    <h1>Pomodoro Timer</h1>
-
-    <section class="timer-display">
-      <div id="session-type">Work</div>
-      <div id="time">25:00</div>
-    </section>
-
-    <section class="controls">
-      <button id="start-btn">Start</button>
-      <button id="pause-btn">Pause</button>
-      <button id="reset-btn">Reset</button>
-    </section>
-
-    <section class="settings">
-      <label>Work (phút): <input id="work-input" type="number" value="25"></label>
-      <label>Break (phút): <input id="break-input" type="number" value="5"></label>
-      <label>Loops: <input id="loops-input" type="number" value="4"></label>
-    </section>
-
-    <section class="music-controls">
-      <button id="music-toggle">🎵 Bật/Tắt nhạc nền</button>
+  <header>
+      <img class="logo-page" src="./assets/pomodoro-technique.png" alt="Pomodoro-Working">
+      <h1 class="page-title">Pomodoro</h1>
+  </header>
+  <main>
+    <section class="digital-clock">
+      <div id="clock">00:00:00</div>
     </section>
   </main>
 
-  <audio id="bell" src="sounds/bell.mp3"></audio>
-  <audio id="bg-music" src="sounds/bg-music.mp3" loop></audio>
-
   <script src="./script/main.js"></script>
+
 </body>
 </html>

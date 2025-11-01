@@ -21,7 +21,7 @@
         <img class="session-icon" src="./assets/technique.png" alt="">
         <h2 class="session-state"><span>Work</span> sessions</h2>
       </div>
-      <div id="clock">00:00:00</div>
+      <div id="count-down">00:00</div>
       <div class="timer-control">
         <button class="time-control">
           <!-- start svg -->
@@ -75,11 +75,44 @@
         </button>
       </div>
     </section>
-    <section class="session-control section-style">
-      <input class="work-time input-control" type="number">
-      <input class="cycle-times input-control" type="number">
-      <input class="break-time input-control" type="number">
-      
+    <section class="session-control">
+      <div class="pomodoro-setting">
+        <label>
+          Work time:
+          <select id="work-select">
+            <option value="25">25 mins</option>
+            <option value="45">45 mins</option>
+            <option value="60">60 mins</option>
+          </select>
+        </label>
+  
+        <label>
+          Break time:
+          <select id="break-select">
+            <option value="5">5 mins</option>
+            <option value="10">10 mins</option>
+            <option value="15">15 mins</option>
+            <option value="20">20 mins</option>
+          </select>
+        </label>
+  
+        <label>
+          Cycles:
+          <select id="cycle-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </label>
+      </div>
+      <!-- Apply -->
+       <div class="pomodoro-apply">
+        <button id="apply-setting">Apply</button>
+        <button id="reset-clock">Reset the clock</button>
+       </div>
     </section>
   </main>
 

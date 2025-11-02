@@ -19,7 +19,7 @@
     <section class="digital-clock">
       <div class="sessions section-style">
         <img class="session-icon" src="./assets/technique.png" alt="">
-        <h2 class="session-state"><span>Work</span> sessions</h2>
+        <h2 class="session-state"><span id="session-name">Work</span> sessions</h2>
       </div>
       <div id="count-down">00:00</div>
       <div class="timer-control">
@@ -115,7 +115,10 @@
        </div>
     </section>
   </main>
-
+  <audio id="start-sound" src="./assets/start-bell.mp3" preload="auto"></audio>
+  <audio id="end-sound" src="./assets/end-bell.mp3" preload="auto"></audio>
+  <audio id="bg-music" src="./assets/bg-music.mp3" preload="auto" loop></audio>
+  <audio id="work-music" src="./assets/work-music.mp3" preload="auto" loop></audio>
   <script src="./script/main.js"></script>
 
 </body>

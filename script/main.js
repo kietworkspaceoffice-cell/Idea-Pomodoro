@@ -59,12 +59,26 @@ function getSettings() {
 
 // --- Bắt đầu đếm ---
 function startTimer() {
+  
+  if (isRunning) document.getElementById("start-sound").play();
   if (isRunning) return;
+  
 
   if (timeLeft === 0 || timeLeft === workDuration || timeLeft === breakDuration) {
     getSettings();
+
+
   }
   isRunning = true;
+  const bgMusic = document.getElementById("bg-music");
+  const workMusic = document.getElementById("work-music");
+  bgMusic.volumn = 0.5;
+  bgMusic.play();
+
+  if (isWorksession) {
+    workMusic.volumn = 0.7;
+    workMusic.play();
+  }
 
   timer = setInterval(() => {
     timeLeft--;
@@ -75,16 +89,31 @@ function startTimer() {
       isRunning = false;
       
       if (isWorksession) {
+        document.getElementById("session-name").innerHTML = "Work";
         sessionsCount++;
         if (sessionsCount >= totalSessions) {
+          bgMusic.pause();
+          bgMusic.currentTime = 0;
+          workMusic.pause();
+          workMusic.currentTime = 0;
+
           return;
         } else {
           isWorksession = false;
           timeLeft = breakDuration;
+          document.getElementById("session-name").innerHTML = "Break";
+          document.getElementById("end-sound").play();
+          workMusic.pause();
         }
       } else {
         isWorksession = true;
         timeLeft = workDuration;
+        document.getElementById("session-name").innerHTML = "Work";
+        document.getElementById("start-sound").play();
+
+        workMusic.play();
+
+
       }
       startTimer();
     }
@@ -95,6 +124,10 @@ function startTimer() {
 function pauseTimer() {
   clearInterval(timer);
   isRunning = false;
+  const bgMusic = document.getElementById("bg-music");
+  const workMusic = document.getElementById("work-music");
+  bgMusic.pause();
+  workMusic.pause();
 }
 
 function resetTimer() {
@@ -113,6 +146,12 @@ function resetTimer() {
   breakDuration = 5 * 60;
   totalSessions = 4;
 
+  const bgMusic = document.getElementById("bg-music");
+  const workMusic = document.getElementById("work-music");
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+  workMusic.pause();
+  workMusic.currentTime = 0;
   // ✅ Reset lại hiển thị đồng hồ
   timeLeft = workDuration;
   updateDisplay();
@@ -128,6 +167,9 @@ controlBtn.addEventListener('click', () => {
     pauseTimer();
   } else {
     startTimer();
+    const bellStart = document.getElementById("start-sound");
+    bellStart.volumn = 0.3;
+    bellStart.play();
   }
 });
 
@@ -137,12 +179,25 @@ controlBtn.addEventListener('click', () => {
 // --- Khởi tạo ban đầu ---
 updateDisplay();
 
-applySetting.addEventListener('click', () => getSettings());
+applySetting.addEventListener('click', () => {
+  getSettings();
+  const workMusic = document.getElementById("work-music");
+  const bgMusic = document.getElementById("bg-music");
+  workMusic.currentTime = 0;
+  bgMusic.currentTime = 0;
+});
 resetClock.addEventListener('click', () => {
   resetTimer()
   if (pauseBtn.classList.contains("active")) {
     pauseBtn.classList.toggle("active");
     playBtn.classList.toggle("active");
+
+    const bgMusic = document.getElementById("bg-music");
+    const workMusic = document.getElementById("work-music");
+    bgMusic.pause();
+    workMusic.pause();
+    bgMusic.currentTime = 0;
+    workMusic.currentTime = 0;
   }
 });
 

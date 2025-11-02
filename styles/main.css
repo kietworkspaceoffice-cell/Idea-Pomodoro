@@ -166,7 +166,19 @@ select {
     background-color: hsla(202, 48%, 76%, 0.459);
 }
 
-@media screen and (min-width: 600px) {
+.attributes {
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    color: white;
+}
+
+.attributes a {
+    text-decoration: none;
+    color: rgb(0, 119, 255);
+}
+
+@media screen and (min-width: 800px) {
     body {
         padding: 1rem 20%;
     }

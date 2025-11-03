@@ -14,6 +14,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 
 /* header */
@@ -125,7 +127,7 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 100px;
+    min-height: 120px;
 }
 
 /* session control */
@@ -196,6 +198,19 @@ select {
     color: rgb(0, 119, 255);
 }
 
+/* Toast */
+.toast {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+#toast-img {
+    width: 30px;
+    height: 30px;
+}
+
+
 @media screen and (min-width: 800px) {
     body {
         padding: 1rem 20%;
@@ -204,5 +219,9 @@ select {
     .sessions {
         width: auto;
         padding: 0.5rem 1rem;
+    }
+
+    label {
+        min-height: 100px;
     }
 }

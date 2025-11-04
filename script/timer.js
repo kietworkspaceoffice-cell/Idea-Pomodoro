@@ -1,58 +1,74 @@
-// timer.js
-import { saveState, loadState } from './storage.js';
-import { showTimeToast } from './toast.js';
 
-let timer = null;
-let isRunning = false;
-let timeLeft = 1500; // 25 phút
+
+
+let isRunning = false; 
+let workDuration = 20;
+let breakDuration = 10;
+let totalSessions = 4;
+let sessionsCount = 0;
+let timeLeft;
+let timePause;
+let timeEnd
+let timeRemain = false;
 let isWorksession = true;
+let timer;
 
-export function formatTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-}
+import { updateDisplay } from './display.js'; 
+updateDisplay(workDuration);
 
-export function updateDisplay() {
-  const countdownEl = document.getElementById("count-down");
-  if (countdownEl) countdownEl.textContent = formatTime(timeLeft);
-}
 
-export function startTimer(workDuration, breakDuration) {
-  if (isRunning) return;
-  isRunning = true;
+export function startTimer() {
+  if (isRunning) {return;};
+  
+  if (timeRemain) {
+    timeEnd = Date.now() + timeRemain*1000
+  } else {
+    const duration = isWorksession?workDuration:breakDuration;
+    timeEnd = Date.now() + duration*1000;
+  };  
 
   timer = setInterval(() => {
-    timeLeft--;
-    updateDisplay();
-    saveState({ timeLeft, isRunning });
-
-    if (timeLeft <= 5 && timeLeft >= 0) {
-      showTimeToast(`⏰ ${timeLeft}s left!`);
-    }
-
-    if (timeLeft <= 0) {
+    
+    isRunning = true;
+    const now = Date.now();
+    timeLeft = Math.max(0, Math.round((timeEnd - now)/1000));
+    updateDisplay(timeLeft);
+    if (timeLeft <=0) {
       clearInterval(timer);
       isRunning = false;
-      isWorksession = !isWorksession;
-      timeLeft = isWorksession ? workDuration : breakDuration;
-      showTimeToast(isWorksession ? "Work time!" : "Break time!");
-      startTimer(workDuration, breakDuration);
+      timeRemain = false;
+      if (isWorksession) {
+        sessionsCount++;
+        if (sessionsCount >= 4) {
+          return;
+        } else {
+          isWorksession = false;
+          setTimeout(() => {
+            startTimer();
+          }, 500);
+        }
+      } else {
+        isWorksession = true;
+          setTimeout(() => {
+            startTimer();
+          }, 500);
+      }
     }
-  }, 1000);
-}
+  }, 50);
+// Khi tạm dừng
+// clearInterval(timer);
+// timePause = timeLeft;
 
+// KHi resume
+
+// timeEnd = Date.now() + timePause*1000;
+// startInterval();
+ console.log(timeRemain);
+ console.log(timeLeft);
+}
 export function pauseTimer() {
   clearInterval(timer);
+  timeRemain = timeLeft;
   isRunning = false;
-  saveState({ timeLeft, isRunning });
-}
-
-export function resetTimer(defaultWork, defaultBreak) {
-  clearInterval(timer);
-  isRunning = false;
-  isWorksession = true;
-  timeLeft = defaultWork;
-  updateDisplay();
-  saveState({});
+  console.log(timeRemain);
 }

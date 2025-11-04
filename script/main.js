@@ -1,26 +1,22 @@
-// main.js
-import { startTimer, pauseTimer, resetTimer, updateDisplay } from './timer.js';
-import { loadState } from './storage.js';
+import { updateDisplay } from "./display.js";
+import { startTimer, pauseTimer } from "./timer.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const controlBtn = document.querySelector(".time-control");
-  const playIcon = document.querySelector(".play-btn");
-  const pauseIcon = document.querySelector(".pause-btn");
-  const resetBtn = document.getElementById("reset-clock");
+let workDuration = 20;
+let breakDuration = 10;
 
-  const { timeLeft } = loadState();
-  if (timeLeft) updateDisplay();
+const controlBtn = document.querySelector(".time-control");
+const playBtn = document.querySelector(".play-btn");
+const pauseBtn = document.querySelector(".pause-btn");
 
-  controlBtn.addEventListener("click", () => {
-      if (playIcon.classList.contains("active")) {
-        startTimer(25 * 60, 5 * 60); // Default durations
-        playIcon.classList.toggle("active");
-        pauseIcon.classList.toggle("active");
-      }  else {
+updateDisplay(workDuration);
+
+controlBtn.addEventListener('click', () => {
+    playBtn.classList.toggle("active");
+    pauseBtn.classList.toggle("active");
+    if (!playBtn.classList.contains("active")) {
+        startTimer();
+    } else {
         pauseTimer();
-        playIcon.classList.toggle("active");
-        pauseIcon.classList.toggle("active");
-      }
-  });
-  resetBtn.addEventListener("click", () => resetTimer(25*60, 5*60));
-});
+    };
+})
+

@@ -1,4 +1,5 @@
 import { showToast } from './toast.js';
+import { playBell, playVideo, pauseVideo, replayVideo, setVolume, fadeVolume } from './music.js';
 
 
 let isRunning = false; 
@@ -18,8 +19,25 @@ import { updateDisplay } from './display.js';
 updateDisplay(workDuration, isWorksession);
 
 
-export function startTimer() {
+
+export async function startTimer() {
   if (isRunning) {return;};
+
+ 
+  setVolume("videoB", 50);
+  playVideo("videoB");
+  // fadeVolume("videoB", 50, 3000);
+
+  if (isWorksession) {
+    // Work phase: bật videoA (chính)
+    setVolume("videoA", 70);
+    playVideo("videoA");
+    fadeVolume("videoA", 70, 2000);
+  } else {
+    // Break phase: tắt videoA, để lại nền B
+    await fadeVolume("videoA", 0, 1500);
+    pauseVideo("videoA");
+  }
 
   hasShowToast = false;
   
@@ -31,7 +49,7 @@ export function startTimer() {
     timeEnd = Date.now() + duration*1000;
   };  
 
-  timer = setInterval(() => {
+  timer = setInterval( async () => {
     
     isRunning = true;
     const now = Date.now();
@@ -39,12 +57,8 @@ export function startTimer() {
     updateDisplay(timeLeft, isWorksession);
 
     if (timeLeft <= timeEnd && !hasShowToast) {
-      if (isWorksession) {
-        showToast("You just start a work session, there are: " + sessionsCount + " session(s) more");
-      } else {
-        showToast("Time to break");
-      }
-
+      showToast(isWorksession?"You just start a work session, there are: " + sessionsCount + " session(s) more":"Time to break");
+      
       hasShowToast = true;
     };
 
@@ -53,32 +67,41 @@ export function startTimer() {
       isRunning = false;
       timeRemain = false;
       if (isWorksession) {
+        await fadeVolume("videoA", 0, 800);
+        pauseVideo("videoA");
+        playBell(!isWorksession);
         sessionsCount++;
+
         if (sessionsCount >= 4) {
           showToast("You have done a cycle pomodoro, Congrats!");
+          pauseVideo("videoB");
           return;
-        } else {
-          isWorksession = false;
-          setTimeout(() => {
-            startTimer();
-          }, 800);
-        }
-      } else {
-        isWorksession = true;
-          setTimeout(() => {
-            startTimer();
-          }, 800);
+        // } else {
+        //   isWorksession = false;
+        //   setTimeout(() => {
+        //     startTimer();
+        //   }, 800);
+        // }
       }
-    }
-  }, 50);
-// Khi tạm dừng
-// clearInterval(timer);
-// timePause = timeLeft;
+      //  else {
+      //   playBell(!isWorksession);
+      //   playVideo("videoA", 70);
+      //   fadeVolume("videoA", 70, 2000);
+      //   isWorksession = true;
+      //     setTimeout(() => {
+      //       startTimer();
+      //     }, 800);
+      // }
+    };
+    playBell(!isWorksession);
+    isWorksession = !isWorksession;
+    
+    setTimeout(() => {
+      startTimer();
+    }, 300);
+  };
+}, 50);
 
-// KHi resume
-
-// timeEnd = Date.now() + timePause*1000;
-// startInterval();
  console.log(timeRemain);
  console.log(timeLeft);
 }
@@ -87,4 +110,7 @@ export function pauseTimer() {
   timeRemain = timeLeft;
   isRunning = false;
   console.log(timeRemain);
+  pauseVideo("videoA");
+  pauseVideo("videoB");
 }
+

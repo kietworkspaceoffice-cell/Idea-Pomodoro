@@ -33,7 +33,7 @@ header {
     box-shadow: 4px 4px 8px rgba(83, 122, 139, 0.568);
 }
 
-h2 {
+h1, h2 {
     margin: 0;
 }
 
@@ -208,6 +208,7 @@ select {
     right: 1rem;
     top: 1rem;
     min-width: 300px;
+    border-radius: 1rem;
 }
 
 #toast-img {
@@ -218,7 +219,7 @@ select {
 
 @media screen and (min-width: 800px) {
     body {
-        padding: 1rem 35%;
+        padding: 1rem 15%;
     }
 
     .sessions {
@@ -229,4 +230,11 @@ select {
     label {
         min-height: 100px;
     }
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        padding: 1rem 35%;
+    }
+
 }

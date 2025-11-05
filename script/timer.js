@@ -1,4 +1,4 @@
-
+import { showToast } from './toast.js';
 
 
 let isRunning = false; 
@@ -12,16 +12,20 @@ let timeEnd
 let timeRemain = false;
 let isWorksession = true;
 let timer;
+let hasShowToast = false;
 
 import { updateDisplay } from './display.js'; 
-updateDisplay(workDuration);
+updateDisplay(workDuration, isWorksession);
 
 
 export function startTimer() {
   if (isRunning) {return;};
+
+  hasShowToast = false;
   
   if (timeRemain) {
     timeEnd = Date.now() + timeRemain*1000
+    hasShowToast = true;
   } else {
     const duration = isWorksession?workDuration:breakDuration;
     timeEnd = Date.now() + duration*1000;
@@ -32,7 +36,18 @@ export function startTimer() {
     isRunning = true;
     const now = Date.now();
     timeLeft = Math.max(0, Math.round((timeEnd - now)/1000));
-    updateDisplay(timeLeft);
+    updateDisplay(timeLeft, isWorksession);
+
+    if (timeLeft <= timeEnd && !hasShowToast) {
+      if (isWorksession) {
+        showToast("You just start a work session, there are: " + sessionsCount + " session(s) more");
+      } else {
+        showToast("Time to break");
+      }
+
+      hasShowToast = true;
+    };
+
     if (timeLeft <=0) {
       clearInterval(timer);
       isRunning = false;
@@ -40,18 +55,19 @@ export function startTimer() {
       if (isWorksession) {
         sessionsCount++;
         if (sessionsCount >= 4) {
+          showToast("You have done a cycle pomodoro, Congrats!");
           return;
         } else {
           isWorksession = false;
           setTimeout(() => {
             startTimer();
-          }, 500);
+          }, 800);
         }
       } else {
         isWorksession = true;
           setTimeout(() => {
             startTimer();
-          }, 500);
+          }, 800);
       }
     }
   }, 50);

@@ -3,12 +3,12 @@ import { startTimer, pauseTimer } from "./timer.js";
 
 let workDuration = 20;
 let breakDuration = 10;
-
+let isWorksession = true;
 const controlBtn = document.querySelector(".time-control");
 const playBtn = document.querySelector(".play-btn");
 const pauseBtn = document.querySelector(".pause-btn");
 
-updateDisplay(workDuration);
+updateDisplay(workDuration, isWorksession);
 
 controlBtn.addEventListener('click', () => {
     playBtn.classList.toggle("active");

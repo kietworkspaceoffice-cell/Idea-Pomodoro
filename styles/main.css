@@ -203,6 +203,7 @@ select {
     position: absolute;
     right: 1rem;
     top: 1rem;
+    min-width: 300px;
 }
 
 #toast-img {
@@ -213,7 +214,7 @@ select {
 
 @media screen and (min-width: 800px) {
     body {
-        padding: 1rem 20%;
+        padding: 1rem 35%;
     }
 
     .sessions {

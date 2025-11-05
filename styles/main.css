@@ -33,6 +33,10 @@ header {
     box-shadow: 4px 4px 8px rgba(83, 122, 139, 0.568);
 }
 
+h2 {
+    margin: 0;
+}
+
 .logo-page {
     width: 50px;
     height: auto;

@@ -1,5 +1,7 @@
 import { updateDisplay } from "./display.js";
 import { startTimer, pauseTimer, getSettings, resetSettings } from "./timer.js";
+import { showConfirm } from "./getInput.js";
+
 
 let workDuration = 20;
 let breakDuration = 10;
@@ -12,7 +14,10 @@ const resetClock = document.getElementById("reset-clock");
 
 getSettings();
 
-applySetting.addEventListener('click', () => {
+applySetting.addEventListener('click', async () => {
+    const isconfirm = await showConfirm("Are you sure to apply this setting? This will reset the clock");
+    if(!isconfirm) return;
+
     if (!playBtn.classList.contains("active")) {
         playBtn.classList.toggle("active");
         pauseBtn.classList.toggle("active");
@@ -26,7 +31,10 @@ applySetting.addEventListener('click', () => {
     // startTimer();
 })
 
-resetClock.addEventListener('click', () => {
+resetClock.addEventListener('click', async () => {
+    const isconfirm = await showConfirm("Are you sure to reset the clock?");
+    if(!isconfirm) return;
+
     if (!playBtn.classList.contains("active")) {
         
         playBtn.classList.toggle("active");

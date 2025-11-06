@@ -74,7 +74,7 @@ export async function startTimer() {
     updateDisplay(timeLeft, isWorksession);
 
     if (timeLeft <= timeEnd && !hasShowToast) {
-      showToast(isWorksession?"You just start a work session, there are: " + sessionsCount + " session(s) more":"Time to break");
+      showToast(isWorksession?"You just start a work session, there are: " + (totalSessions - sessionsCount) + " session(s) more":"Time to break");
       
       hasShowToast = true;
     };

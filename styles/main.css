@@ -33,6 +33,10 @@ header {
     box-shadow: 4px 4px 8px rgba(83, 122, 139, 0.568);
 }
 
+button, select, option {
+    cursor: pointer;
+}
+
 h1, h2 {
     margin: 0;
 }
@@ -216,6 +220,61 @@ select {
     height: 30px;
 }
 
+/* Confirmations dialog */
+.dialog-lightbox {
+    position: fixed;
+    height:100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background-color: hsla(0, 0%, 13%, 0.329);
+}
+.confirm-dialog {
+    max-width: 250px;
+    min-height: 150px;
+    background-color: hsla(212, 69%, 57%, 0.897);
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.confirm-dialog button {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border: none;
+}
+
+#confirm:hover {
+    background-color: hsl(214, 100%, 50%);
+}
+
+#confirm:hover #check-btn {
+    fill: white;
+}
+
+#discard:hover {
+    background-color: rgb(255, 102, 0);
+}
+
+#discard:hover #close-btn {
+    fill: white;
+}
+
+
+
+.confirm-btn {
+    height: 30px;
+    width: 30px;
+}
+
+.open-box {
+    display: flex;
+}
 
 @media screen and (min-width: 800px) {
     body {

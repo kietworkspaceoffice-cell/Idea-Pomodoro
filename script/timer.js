@@ -8,8 +8,7 @@ let breakDuration = 10;
 let totalSessions = 4;
 let sessionsCount = 0;
 let timeLeft;
-let timePause;
-let timeEnd
+let timeEnd;
 let timeRemain = false;
 let isWorksession = true;
 let timer;
@@ -19,10 +18,28 @@ import { updateDisplay } from './display.js';
 updateDisplay(workDuration, isWorksession);
 
 
+export function getSettings() {
+  workDuration = parseInt(document.getElementById("work-select").value)*60;
+  breakDuration = parseInt(document.getElementById("break-select").value)*60;
+  totalSessions = parseInt(document.getElementById("cycle-select").value);
+
+  updateDisplay(workDuration, true);
+  isRunning = false;
+  isWorksession = true;
+  timeRemain = false;
+}
+
+
+export function resetSettings() {
+  document.getElementById("work-select").value = 25;
+  document.getElementById("break-select").value = 5;
+  document.getElementById("cycle-select").value = 4;
+
+  getSettings();
+}
 
 export async function startTimer() {
   if (isRunning) {return;};
-
  
   setVolume("videoB", 50);
   playVideo("videoB");
@@ -72,7 +89,7 @@ export async function startTimer() {
         playBell(!isWorksession);
         sessionsCount++;
 
-        if (sessionsCount >= 4) {
+        if (sessionsCount >= totalSessions) {
           showToast("You have done a cycle pomodoro, Congrats!");
           pauseVideo("videoB");
           return;

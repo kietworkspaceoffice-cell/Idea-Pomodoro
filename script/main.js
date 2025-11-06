@@ -1,6 +1,7 @@
 import { updateDisplay } from "./display.js";
 import { startTimer, pauseTimer, getSettings, resetSettings } from "./timer.js";
 import { showConfirm } from "./getInput.js";
+import { replayVideo, pauseVideo } from "./music.js";
 
 
 let workDuration = 20;
@@ -23,8 +24,16 @@ applySetting.addEventListener('click', async () => {
         pauseBtn.classList.toggle("active");
         pauseTimer();
         getSettings();
+        replayVideo("videoA");
+        replayVideo("videoB");
+        pauseVideo("videoA");
+        pauseVideo("videoB");
     } else {
         getSettings();
+        replayVideo("videoA");
+        replayVideo("videoB");
+        pauseVideo("videoA");
+        pauseVideo("videoB");
     }
     
     // getSettings();
@@ -42,6 +51,10 @@ resetClock.addEventListener('click', async () => {
     }
     pauseTimer();
     resetSettings();
+    replayVideo("videoA");
+    replayVideo("videoB");
+    pauseVideo("videoA");
+    pauseVideo("videoB");
 })
 
 controlBtn.addEventListener('click', () => {

@@ -76,3 +76,24 @@ export async function fadeVolume(id, targetVolume, duration = 1000) {
 
 
 
+
+
+// Hàm trích ID video từ nhiều loại URL khác nhau
+export function extractVideoId(url) {
+  const regex =
+    /(?:youtube\.com\/(?:.*v=|embed\/)|youtu\.be\/)([^&?/]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+}
+
+
+// btn.addEventListener('click', () => {
+//   const url = input.value.trim();
+//   const videoId = extractVideoId(url);
+
+//   if (videoId) {
+//     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1`;
+//   } else {
+//     alert('Link YouTube không hợp lệ!');
+//   }
+// });

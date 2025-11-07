@@ -1,7 +1,7 @@
 import { updateDisplay } from "./display.js";
 import { startTimer, pauseTimer, getSettings, resetSettings } from "./timer.js";
 import { showConfirm } from "./getInput.js";
-import { replayVideo, pauseVideo } from "./music.js";
+import { replayVideo, pauseVideo, extractVideoId } from "./music.js";
 
 
 let workDuration = 20;
@@ -12,6 +12,8 @@ const playBtn = document.querySelector(".play-btn");
 const pauseBtn = document.querySelector(".pause-btn");
 const applySetting = document.getElementById("apply-setting");
 const resetClock = document.getElementById("reset-clock");
+const input = document.getElementById('video-link');
+const iframe = document.getElementById('videoA');
 
 getSettings();
 
@@ -22,6 +24,18 @@ applySetting.addEventListener('click', async () => {
     if (!playBtn.classList.contains("active")) {
         playBtn.classList.toggle("active");
         pauseBtn.classList.toggle("active");
+        // change video id
+        const url = input.value.trim();
+        const videoId = extractVideoId(url);
+
+        if (videoId) {
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1`;
+        } else if(videoId == null) {
+            iframe.src = `https://www.youtube.com/embed/hj83cwfOF3Y?si=vHUrPOIiNQFjphHe&enablejsapi=1`;
+        } else {
+            alert('Link YouTube không hợp lệ!');
+        }
+        // 
         pauseTimer();
         getSettings();
         replayVideo("videoA");
@@ -29,6 +43,18 @@ applySetting.addEventListener('click', async () => {
         pauseVideo("videoA");
         pauseVideo("videoB");
     } else {
+
+        const url = input.value.trim();
+        const videoId = extractVideoId(url);
+
+        if (videoId) {
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1`;
+        } else if(videoId == null) {
+            iframe.src = `https://www.youtube.com/embed/hj83cwfOF3Y?si=vHUrPOIiNQFjphHe&enablejsapi=1`;
+        } else {
+            alert('Link YouTube không hợp lệ!');
+        }
+
         getSettings();
         replayVideo("videoA");
         replayVideo("videoB");
@@ -49,6 +75,8 @@ resetClock.addEventListener('click', async () => {
         playBtn.classList.toggle("active");
         pauseBtn.classList.toggle("active");
     }
+
+    iframe.src = `https://www.youtube.com/embed/hj83cwfOF3Y?si=vHUrPOIiNQFjphHe&enablejsapi=1`;
     pauseTimer();
     resetSettings();
     replayVideo("videoA");

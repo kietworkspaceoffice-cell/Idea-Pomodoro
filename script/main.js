@@ -77,6 +77,7 @@ resetClock.addEventListener('click', async () => {
     }
 
     iframe.src = `https://www.youtube.com/embed/hj83cwfOF3Y?si=vHUrPOIiNQFjphHe&enablejsapi=1`;
+    input.value = null;
     pauseTimer();
     resetSettings();
     replayVideo("videoA");

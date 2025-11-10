@@ -122,6 +122,8 @@ export async function startTimer() {
  console.log(timeRemain);
  console.log(timeLeft);
 }
+
+
 export function pauseTimer() {
   clearInterval(timer);
   timeRemain = timeLeft;
@@ -130,4 +132,14 @@ export function pauseTimer() {
   pauseVideo("videoA");
   pauseVideo("videoB");
 }
+
+//Check xem có phải là trình duyệt mobile hay không
+
+
+export function autoPause() {
+  if (document.hidden && isRunning) {
+    pauseTimer();
+    showToast("The clock will automatically stop when you exit the browser.");
+  }
+};
 

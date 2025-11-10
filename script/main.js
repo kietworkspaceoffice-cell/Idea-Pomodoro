@@ -1,7 +1,8 @@
 import { updateDisplay } from "./display.js";
-import { startTimer, pauseTimer, getSettings, resetSettings } from "./timer.js";
+import { startTimer, pauseTimer, getSettings, resetSettings, autoPause } from "./timer.js";
 import { showConfirm } from "./getInput.js";
 import { replayVideo, pauseVideo, extractVideoId } from "./music.js";
+import { showToast } from "./toast.js";
 
 
 let workDuration = 20;
@@ -14,6 +15,8 @@ const applySetting = document.getElementById("apply-setting");
 const resetClock = document.getElementById("reset-clock");
 const input = document.getElementById('video-link');
 const iframe = document.getElementById('videoA');
+
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 getSettings();
 
@@ -96,5 +99,13 @@ controlBtn.addEventListener('click', () => {
     };
 })
 
-
+document.addEventListener('visibilitychange', () => {
+    if (isMobile) {
+        autoPause();
+        if (!playBtn.classList.contains('active')) {
+            playBtn.classList.toggle("active");
+            pauseBtn.classList.toggle("active");
+        };
+    };
+});
 
